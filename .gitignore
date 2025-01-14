@@ -1,2 +1,6 @@
 
 .codegpt
+__pycache__/
+.zip
+.env
+mvenv/
