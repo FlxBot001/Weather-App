@@ -16,7 +16,7 @@ class WeatherDashboard:
         
         # Define the test URL endpoint and parameters for the request
         test_url = "http://api.openweathermap.org/data/2.5/weather"
-        test_params = {"q": "London", "appid": self.api_key, "units": "imperial"}
+        test_params = {"q": "Nairobi", "appid": self.api_key, "units": "imperial"}
 
         try:
             # Send a GET request to the OpenWeather API with the test parameters
