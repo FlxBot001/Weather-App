@@ -29,3 +29,20 @@ class WeatherDashboard:
             print(f"Successfully created bucket {self.bucket_name}")
         except Exception as e:
             print(f"Error creating bucket: {e}")
+
+        def fetch_weather(self, city):
+            """Fetch weather data from OpenWeather API"""
+            base_url = "http://api.openweathermap.org/data/2.5/weather"
+            params = {
+                "q": city,
+                "appid": self.api_key,
+                "units": "imperial"
+            }
+        
+            try:
+                response = requests.get(base_url, params=params)
+                response.raise_for_status()
+                return response.json()
+            except requests.exceptions.RequestException as e:
+                print(f"Error fetching weather data: {e}")
+                return None
