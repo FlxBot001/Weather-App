@@ -11,6 +11,37 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class WeatherDashboard:
+    def validate_api_key(self):
+        """Validating the OpenWeather API key by making a test call"""
+        
+        # Define the test URL endpoint and parameters for the request
+        test_url = "http://api.openweathermap.org/data/2.5/weather"
+        test_params = {"q": "London", "appid": self.api_key, "units": "imperial"}
+
+        try:
+            # Send a GET request to the OpenWeather API with the test parameters
+            response = requests.get(test_url, params=test_params)
+
+            # Check if the response status code indicates an unauthorized request (invalid API key)
+            if response.status_code == 401:
+                print("Invalid OpenWeather API Key. Please check your .env file.")
+                return False  # Return False if the API key is invalid
+
+            # Check if the response status code indicates success (valid API key)
+            elif response.status_code == 200:
+                print("OpenWeather API Key is valid.")
+                return True  # Return True if the API key is valid
+
+            # Handle any unexpected status codes and print the status for debugging
+            else:
+                print(f"Unexpected response while validating API key: {response.status_code}")
+                return False  # Return False if the response is unexpected
+
+        # Catch and handle any request-related exceptions (e.g., connection issues)
+        except requests.exceptions.RequestException as e:
+            print(f"Error validating API key: {e}")
+            return False  # Return False if an error occurs during the request
+
     """A class to fetch weather data from OpenWeather API and save it to an AWS S3 bucket."""
 
     def __init__(self):
