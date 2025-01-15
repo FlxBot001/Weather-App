@@ -46,3 +46,25 @@ class WeatherDashboard:
             except requests.exceptions.RequestException as e:
                 print(f"Error fetching weather data: {e}")
                 return None
+            
+        def save_to_s3(self, weather_data, city):
+            """Save weather data to S3 bucket"""
+            if not weather_data:
+                return False
+                
+            timestamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+            file_name = f"weather-data/{city}-{timestamp}.json"
+            
+            try:
+                weather_data['timestamp'] = timestamp
+                self.s3_client.put_object(
+                    Bucket=self.bucket_name,
+                    Key=file_name,
+                    Body=json.dumps(weather_data),
+                    ContentType='application/json'
+                )
+                print(f"Successfully saved data for {city} to S3")
+                return True
+            except Exception as e:
+                print(f"Error saving to S3: {e}")
+                return False
