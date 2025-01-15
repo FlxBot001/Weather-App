@@ -29,8 +29,6 @@ This project is a Weather Data Collection System that demonstrates core DevOps p
 
 ## Technical Architecture
 
-![AWS S3 Architecture Diagram](weather-dashboard/images/architecture.png)
-
 - **Language:** Python 3.x
 - **Cloud Provider:** AWS (S3)
 - **External API:** OpenWeather API
