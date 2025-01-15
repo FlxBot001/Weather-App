@@ -50,5 +50,4 @@ weather-dashboard/
   .env
   .gitignore
   requirements.txt
-```
-![AWS S3 Architecture Diagram](weather-dashboard/images/ide-structure.png)
+  ```
