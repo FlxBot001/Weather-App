@@ -20,7 +20,7 @@ class WeatherDashboard:
         self.bucket_name = os.getenv('AWS_BUCKET_NAME')
 
         # Create an S3 client using boto3 to interact with AWS S3 service
-        self.s3_client = boto3.client('s3')
+        self.s3_client = boto3.client('s3', region_name=os.getenv('AWS_REGION'))
 
     def create_bucket_if_not_exists(self):
         """
@@ -132,7 +132,7 @@ class WeatherDashboard:
         dashboard.create_bucket_if_not_exists()
 
         # Define a list of cities to fetch weather data for
-        cities = ["Philadelphia", "Seattle", "New York"]
+        cities = ["Nairobi", "Machakos", "Chwele"]
 
         # Iterate over each city in the list
         for city in cities:
